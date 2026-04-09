@@ -1,98 +1,242 @@
-<!DOCTYPE html><html lang="ur" dir="rtl">
+<!DOCTYPE html>
+<html lang="ur" dir="rtl">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Glamrs Beauty Parlour & Training Center</title>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-<style>
-:root { --primary:#111; --accent:#e91e63; --bg:#fff5f8; --success:#27ae60; }
-body{margin:0;font-family:sans-serif;background:var(--bg);text-align:right}/* Ticker */ .ticker{background:var(--accent);color:#fff;padding:8px;white-space:nowrap;overflow:hidden} .ticker span{display:inline-block;animation:scroll 15s linear infinite} @keyframes scroll{0%{transform:translateX(-100%)}100%{transform:translateX(100%)}}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Glamrs Beauty Parlor & Training Center</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --gold: #d4af37;
+            --pink: #ff4d94;
+            --dark-luxury: #1a1a1a;
+            --soft-bg: #fff5f8;
+            --white: #ffffff;
+        }
 
-header{background:var(--primary);color:#fff;padding:15px;display:flex;justify-content:space-between;align-items:center} .logo{color:var(--accent);font-weight:bold}
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            background: var(--soft-bg);
+            color: #333;
+            scroll-behavior: smooth;
+        }
 
-.search{flex:1;margin:0 10px} .search input{width:100%;padding:8px;border-radius:20px;border:none;text-align:right}
+        /* Top Bar Animation */
+        .announcement-bar {
+            background: linear-gradient(90deg, var(--dark-luxury), var(--pink));
+            color: white;
+            padding: 10px 0;
+            text-align: center;
+            font-size: 14px;
+            font-weight: bold;
+            overflow: hidden;
+        }
 
-.hero{height:250px;background:url('https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9') center/cover;display:flex;align-items:center;justify-content:center;color:#fff} .hero h1{background:rgba(0,0,0,0.6);padding:10px;border-radius:10px}
+        /* Navigation */
+        nav {
+            background: var(--white);
+            padding: 15px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
 
-.container{padding:20px} .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:20px} .card{background:#fff;border-radius:10px;overflow:hidden;box-shadow:0 5px 15px rgba(0,0,0,0.1)} .card img{width:100%;height:180px;object-fit:cover} .card-body{padding:10px} .price{color:var(--success);font-weight:bold} .btn{background:var(--primary);color:#fff;border:none;padding:10px;width:100%;cursor:pointer}
+        .logo {
+            font-size: 26px;
+            font-weight: 900;
+            color: var(--pink);
+            text-decoration: none;
+            letter-spacing: 1px;
+        }
 
-.cart-btn{position:fixed;bottom:20px;left:20px;background:var(--primary);color:#fff;width:60px;height:60px;border-radius:50%;display:flex;justify-content:center;align-items:center}
+        .logo span { color: var(--gold); }
 
-#cart{position:fixed;left:-320px;top:0;width:300px;height:100%;background:#fff;padding:15px;transition:0.3s;overflow:hidden} #cart.active{left:0}
+        /* Hero Section */
+        .hero {
+            height: 80vh;
+            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), 
+                        url('https://images.unsplash.com/photo-1560066984-138dadb4c035?q=80&w=1600&auto=format&fit=crop');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            text-align: center;
+            padding: 20px;
+        }
 
-.whatsapp{background:#25D366;color:#fff;padding:10px;text-align:center;margin-top:10px;cursor:pointer} </style>
+        .hero h1 { font-size: 3.5rem; margin-bottom: 10px; text-shadow: 2px 2px 10px rgba(0,0,0,0.5); }
+        .hero p { font-size: 1.2rem; max-width: 600px; }
 
+        /* Booking Button */
+        .btn-book {
+            background: var(--pink);
+            color: white;
+            padding: 15px 40px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 18px;
+            transition: 0.3s;
+            margin-top: 20px;
+            border: 2px solid transparent;
+        }
+
+        .btn-book:hover {
+            background: transparent;
+            border-color: var(--pink);
+            color: var(--pink);
+        }
+
+        /* Services Grid */
+        .section { padding: 60px 5%; max-width: 1200px; margin: auto; }
+        .section-title { text-align: center; margin-bottom: 40px; }
+        .section-title h2 { font-size: 32px; color: var(--dark-luxury); border-bottom: 3px solid var(--pink); display: inline-block; padding-bottom: 5px; }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+        }
+
+        .service-card {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+            transition: 0.4s;
+            text-align: center;
+        }
+
+        .service-card:hover { transform: translateY(-10px); }
+        .service-card img { width: 100%; height: 250px; object-fit: cover; }
+        .service-card h3 { padding: 15px; margin: 0; color: var(--dark-luxury); }
+        .price-tag { color: var(--pink); font-weight: bold; font-size: 20px; padding-bottom: 15px; display: block; }
+
+        /* Training Center Section */
+        .training-banner {
+            background: var(--dark-luxury);
+            color: white;
+            padding: 40px;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-top: 40px;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        /* Floating Contact */
+        .whatsapp-float {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: #25D366;
+            color: white;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 30px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            z-index: 1000;
+            text-decoration: none;
+        }
+
+        footer { background: var(--dark-luxury); color: white; text-align: center; padding: 30px; margin-top: 50px; }
+
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2.2rem; }
+            .training-banner { text-align: center; justify-content: center; }
+        }
+    </style>
 </head>
-<body><div class="ticker"><span>🔥 Glamrs Beauty Parlour | Bridal Makeup | Courses Available | 📞 03488222368</span></div><header>
-<div class="logo">GLAMRS</div>
-<div class="search"><input type="text" placeholder="سروس تلاش کریں" onkeyup="searchItem(this.value)"></div>
-<div>📞 03488222368</div>
-</header><div class="hero"><h1>Glamrs Beauty Parlour</h1></div><div class="container">
-<h2>Services & Courses</h2>
-<div class="grid" id="grid"><div class="card item" data-name="bridal makeup">
-<img src="https://images.unsplash.com/photo-1522337360788-8b13dee7a37e">
-<div class="card-body">
-<h3>Bridal Makeup</h3>
-<div class="price">Rs. 15000</div>
-<button class="btn" onclick="add('Bridal Makeup',15000)">Book</button>
+<body>
+
+<div class="announcement-bar">
+    ✨ Glamrs Training Center میں داخلے شروع ہیں! پروفیشنل بیوٹیشن بننے کا سنہری موقع ✨
 </div>
-</div><div class="card item" data-name="hair styling">
-<img src="https://images.unsplash.com/photo-1519415510236-718bdfcd89c8">
-<div class="card-body">
-<h3>Hair Styling</h3>
-<div class="price">Rs. 3000</div>
-<button class="btn" onclick="add('Hair Styling',3000)">Book</button>
+
+<nav>
+    <a href="#" class="logo">GLAMRS <span>BEAUTY</span></a>
+    <div>
+        <a href="tel:03488222368" style="text-decoration:none; color:var(--dark-luxury); font-weight:bold;">
+            <i class="fas fa-phone-alt"></i> 0348-8222368
+        </a>
+    </div>
+</nav>
+
+<div class="hero">
+    <h1>خوبصورتی، اب آپ کی پہنچ میں</h1>
+    <p>جدید ترین میک اپ، ہیئر سٹائلنگ اور اسکن کیئر سروسز کے لیے شہر کا سب سے بہترین بیوٹی پارلر۔</p>
+    <a href="https://wa.me/923488222368?text=السلام علیکم! مجھے بکنگ کروانی ہے۔" class="btn-book">ابھی بکنگ کریں</a>
 </div>
-</div><div class="card item" data-name="facial skin care">
-<img src="https://images.unsplash.com/photo-1596464716127-f2a82984de30">
-<div class="card-body">
-<h3>Facial / Skin Care</h3>
-<div class="price">Rs. 2500</div>
-<button class="btn" onclick="add('Facial',2500)">Book</button>
+
+<div class="section">
+    <div class="section-title">
+        <h2>ہماری خاص سروسز</h2>
+    </div>
+    
+    <div class="services-grid">
+        <div class="service-card">
+            <img src="https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?q=80&w=500&auto=format&fit=crop" alt="Bridal Makeup">
+            <h3>برائیڈل میک اپ</h3>
+            <span class="price-tag">Rs. 15,000 سے شروع</span>
+        </div>
+
+        <div class="service-card">
+            <img src="https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?q=80&w=500&auto=format&fit=crop" alt="Facial">
+            <h3>ہائیڈرا فیشل / سکن ٹریٹمنٹ</h3>
+            <span class="price-tag">Rs. 3,500</span>
+        </div>
+
+        <div class="service-card">
+            <img src="https://images.unsplash.com/photo-1562322140-8baeececf3df?q=80&w=500&auto=format&fit=crop" alt="Hair Style">
+            <h3>ہیئر کٹنگ و کلرنگ</h3>
+            <span class="price-tag">Rs. 2,000</span>
+        </div>
+    </div>
 </div>
-</div><div class="card item" data-name="makeup course training">
-<img src="https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9">
-<div class="card-body">
-<h3>Makeup Course</h3>
-<div class="price">Rs. 20000</div>
-<button class="btn" onclick="add('Course',20000)">Join</button>
+
+<div class="section" style="background: white;">
+    <div class="training-banner">
+        <div>
+            <h2 style="color: var(--gold); margin: 0;">بیوٹیشن ٹریننگ سینٹر</h2>
+            <p>اپنا مستقبل سنواریں، ہم سے پروفیشنل کورسز سیکھیں اور سرٹیفکیٹ حاصل کریں۔</p>
+        </div>
+        <a href="https://wa.me/923488222368?text=کورس کی تفصیلات درکار ہیں۔" class="btn-book" style="background:var(--gold);">کورس کی معلومات</a>
+    </div>
 </div>
-</div></div>
-</div><div class="cart-btn" onclick="toggleCart()">🛒</div><div id="cart">
-<button onclick="toggleCart()" style="position:absolute;top:10px;right:10px;border:none;background:none;font-size:22px;cursor:pointer">✖</button>
-<h3>آپ کا آرڈر</h3>
-<div id="list"></div>
-<h4>Total: Rs. <span id="total">0</span></h4>
-<div class="whatsapp" onclick="send()">WhatsApp Order</div>
-</div><script>
-let cart=[];
 
-function toggleCart(){document.getElementById('cart').classList.toggle('active')}
+<div class="section">
+    <div class="section-title">
+        <h2>رابطہ اور لوکیشن</h2>
+    </div>
+    <div style="text-align: center; background: white; padding: 30px; border-radius: 20px;">
+        <p><i class="fas fa-map-marker-alt" style="color: var(--pink);"></i> منڈی بہاؤالدین (مین بازار / یا اپنا پتہ یہاں لکھیں)</p>
+        <p><i class="fas fa-clock" style="color: var(--pink);"></i> صبح 10 بجے سے شام 8 بجے تک</p>
+        <p><i class="fas fa-phone-square-alt" style="color: var(--pink);"></i> 0348-8222368</p>
+    </div>
+</div>
 
-function add(name,price){
-let item=cart.find(i=>i.name==name);
-item?item.qty++:cart.push({name,price,qty:1});
-update();
-}
+<footer>
+    <p>&copy; 2026 Glamrs Beauty Parlor. All Rights Reserved.</p>
+    <p>Developed with ❤️ for a Professional Look</p>
+</footer>
 
-function update(){
-let list=document.getElementById('list');
-let total=0;list.innerHTML='';
-cart.forEach(i=>{total+=i.price*i.qty;list.innerHTML+=i.name+' x'+i.qty+'<br>'});
-document.getElementById('total').innerText=total;
-}
+<a href="https://wa.me/923488222368" class="whatsapp-float">
+    <i class="fab fa-whatsapp"></i>
+</a>
 
-function searchItem(val){
-val=val.toLowerCase();
-document.querySelectorAll('.item').forEach(i=>{
-i.style.display=i.dataset.name.includes(val)?'block':'none'
-})
-}
-
-function send(){
-let text='Glamrs Beauty Order%0A';
-cart.forEach(i=>{text+=i.name+' x'+i.qty+'%0A'});
-window.open('https://wa.me/923488222368?text='+text)
-}
-</script></body>
+</body>
 </html>
