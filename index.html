@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Glamrs Beauty Parlor & Training Center</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    
     <style>
         :root {
             --gold: #d4af37;
@@ -20,9 +22,33 @@
             background: var(--soft-bg);
             color: #333;
             scroll-behavior: smooth;
+            overflow-x: hidden;
         }
 
-        /* Top Bar Animation */
+        /* 1. Logo Animation Logic */
+        @keyframes shine {
+            0% { background-position: -100px; }
+            100% { background-position: 100px; }
+        }
+
+        .logo {
+            font-size: 26px;
+            font-weight: 900;
+            color: var(--pink);
+            text-decoration: none;
+            letter-spacing: 1px;
+            position: relative;
+        }
+        .logo span { 
+            color: var(--gold); 
+            background: linear-gradient(120deg, #d4af37 0%, #fff 50%, #d4af37 100%);
+            background-size: 100px;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: shine 3s linear infinite;
+        }
+
+        /* Top Bar */
         .announcement-bar {
             background: linear-gradient(90deg, var(--dark-luxury), var(--pink));
             color: white;
@@ -30,10 +56,8 @@
             text-align: center;
             font-size: 14px;
             font-weight: bold;
-            overflow: hidden;
         }
 
-        /* Navigation */
         nav {
             background: var(--white);
             padding: 15px 5%;
@@ -46,17 +70,7 @@
             z-index: 1000;
         }
 
-        .logo {
-            font-size: 26px;
-            font-weight: 900;
-            color: var(--pink);
-            text-decoration: none;
-            letter-spacing: 1px;
-        }
-
-        .logo span { color: var(--gold); }
-
-        /* Hero Section */
+        /* Hero Section Animation */
         .hero {
             height: 80vh;
             background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), 
@@ -72,10 +86,18 @@
             padding: 20px;
         }
 
-        .hero h1 { font-size: 3.5rem; margin-bottom: 10px; text-shadow: 2px 2px 10px rgba(0,0,0,0.5); }
-        .hero p { font-size: 1.2rem; max-width: 600px; }
+        .hero h1 { 
+            font-size: 3.5rem; 
+            margin-bottom: 10px; 
+            text-shadow: 2px 2px 10px rgba(0,0,0,0.5);
+            animation: fadeInUp 1s both;
+        }
+        .hero p { 
+            font-size: 1.2rem; 
+            max-width: 600px;
+            animation: fadeInUp 1s 0.3s both;
+        }
 
-        /* Booking Button */
         .btn-book {
             background: var(--pink);
             color: white;
@@ -87,16 +109,20 @@
             transition: 0.3s;
             margin-top: 20px;
             border: 2px solid transparent;
+            animation: fadeInUp 1s 0.6s both;
+            display: inline-block;
         }
 
         .btn-book:hover {
-            background: transparent;
-            border-color: var(--pink);
-            color: var(--pink);
+            transform: scale(1.05);
+            box-shadow: 0 5px 15px rgba(255, 77, 148, 0.4);
         }
 
-        /* Services Grid */
+        /* Sections and Reveal Animation */
         .section { padding: 60px 5%; max-width: 1200px; margin: auto; }
+        .reveal { opacity: 0; transform: translateY(30px); transition: all 0.8s ease-out; }
+        .reveal.active { opacity: 1; transform: translateY(0); }
+
         .section-title { text-align: center; margin-bottom: 40px; }
         .section-title h2 { font-size: 32px; color: var(--dark-luxury); border-bottom: 3px solid var(--pink); display: inline-block; padding-bottom: 5px; }
 
@@ -115,12 +141,15 @@
             text-align: center;
         }
 
-        .service-card:hover { transform: translateY(-10px); }
-        .service-card img { width: 100%; height: 250px; object-fit: cover; }
+        .service-card:hover { 
+            transform: translateY(-15px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+        }
+        .service-card img { width: 100%; height: 250px; object-fit: cover; transition: 0.5s; }
+        .service-card:hover img { transform: scale(1.1); }
         .service-card h3 { padding: 15px; margin: 0; color: var(--dark-luxury); }
         .price-tag { color: var(--pink); font-weight: bold; font-size: 20px; padding-bottom: 15px; display: block; }
 
-        /* Training Center Section */
         .training-banner {
             background: var(--dark-luxury);
             color: white;
@@ -134,7 +163,6 @@
             gap: 20px;
         }
 
-        /* Floating Contact */
         .whatsapp-float {
             position: fixed;
             bottom: 30px;
@@ -151,9 +179,21 @@
             box-shadow: 0 5px 15px rgba(0,0,0,0.3);
             z-index: 1000;
             text-decoration: none;
+            animation: pulse 2s infinite;
         }
 
         footer { background: var(--dark-luxury); color: white; text-align: center; padding: 30px; margin-top: 50px; }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(40px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
 
         @media (max-width: 768px) {
             .hero h1 { font-size: 2.2rem; }
@@ -163,7 +203,7 @@
 </head>
 <body>
 
-<div class="announcement-bar">
+<div class="announcement-bar animate__animated animate__fadeIn">
     ✨ Glamrs Training Center میں داخلے شروع ہیں! پروفیشنل بیوٹیشن بننے کا سنہری موقع ✨
 </div>
 
@@ -182,7 +222,7 @@
     <a href="https://wa.me/923488222368?text=السلام علیکم! مجھے بکنگ کروانی ہے۔" class="btn-book">ابھی بکنگ کریں</a>
 </div>
 
-<div class="section">
+<div class="section reveal">
     <div class="section-title">
         <h2>ہماری خاص سروسز</h2>
     </div>
@@ -208,22 +248,22 @@
     </div>
 </div>
 
-<div class="section" style="background: white;">
+<div class="section reveal" style="background: white;">
     <div class="training-banner">
         <div>
             <h2 style="color: var(--gold); margin: 0;">بیوٹیشن ٹریننگ سینٹر</h2>
             <p>اپنا مستقبل سنواریں، ہم سے پروفیشنل کورسز سیکھیں اور سرٹیفکیٹ حاصل کریں۔</p>
         </div>
-        <a href="https://wa.me/923488222368?text=کورس کی تفصیلات درکار ہیں۔" class="btn-book" style="background:var(--gold);">کورس کی معلومات</a>
+        <a href="https://wa.me/923488222368?text=کورس کی تفصیلات درکار ہیں۔" class="btn-book" style="background:var(--gold); animation: none;">کورس کی معلومات</a>
     </div>
 </div>
 
-<div class="section">
+<div class="section reveal">
     <div class="section-title">
         <h2>رابطہ اور لوکیشن</h2>
     </div>
-    <div style="text-align: center; background: white; padding: 30px; border-radius: 20px;">
-        <p><i class="fas fa-map-marker-alt" style="color: var(--pink);"></i> منڈی بہاؤالدین (مین بازار / یا اپنا پتہ یہاں لکھیں)</p>
+    <div style="text-align: center; background: white; padding: 30px; border-radius: 20px; box-shadow: 0 5px 15px rgba(0,0,0,0.05);">
+        <p><i class="fas fa-map-marker-alt" style="color: var(--pink);"></i> منڈی بہاؤالدین (مین بازار)</p>
         <p><i class="fas fa-clock" style="color: var(--pink);"></i> صبح 10 بجے سے شام 8 بجے تک</p>
         <p><i class="fas fa-phone-square-alt" style="color: var(--pink);"></i> 0348-8222368</p>
     </div>
@@ -231,12 +271,31 @@
 
 <footer>
     <p>&copy; 2026 Glamrs Beauty Parlor. All Rights Reserved.</p>
-    <p>Developed with ❤️ for a Professional Look</p>
+    <p>Designed with Luxury Animations ✨</p>
 </footer>
 
 <a href="https://wa.me/923488222368" class="whatsapp-float">
     <i class="fab fa-whatsapp"></i>
 </a>
+
+<script>
+    // Scroll Reveal Logic
+    function reveal() {
+        var reveals = document.querySelectorAll(".reveal");
+        for (var i = 0; i < reveals.length; i++) {
+            var windowHeight = window.innerHeight;
+            var elementTop = reveals[i].getBoundingClientRect().top;
+            var elementVisible = 150;
+            if (elementTop < windowHeight - elementVisible) {
+                reveals[i].classList.add("active");
+            }
+        }
+    }
+    window.addEventListener("scroll", reveal);
+    
+    // Initial call to check elements on load
+    reveal();
+</script>
 
 </body>
 </html>
