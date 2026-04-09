@@ -5,54 +5,93 @@
 <title>Glamrs Beauty Parlour & Training Center</title>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 <style>
-:root{--primary:#111;--accent:#e91e63;--bg:#fff5f8}
-body{margin:0;font-family:sans-serif;background:var(--bg);text-align:right}
-header{background:var(--primary);color:#fff;padding:15px;display:flex;justify-content:space-between}
-.logo{color:var(--accent);font-weight:bold}
-.hero{height:300px;background:url('https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9') center/cover;display:flex;align-items:center;justify-content:center;color:#fff}
-.hero h1{background:rgba(0,0,0,0.6);padding:10px;border-radius:10px}
-.container{padding:20px}
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:20px}
-.card{background:#fff;border-radius:10px;overflow:hidden;box-shadow:0 5px 15px rgba(0,0,0,0.1)}
-.card img{width:100%;height:200px;object-fit:cover}
-.card-body{padding:10px}
-.btn{background:var(--accent);color:#fff;border:none;padding:10px;width:100%;cursor:pointer}
-footer{background:#111;color:#fff;padding:20px;text-align:center}
-</style>
+:root { --primary:#111; --accent:#e91e63; --bg:#fff5f8; --success:#27ae60; }
+body{margin:0;font-family:sans-serif;background:var(--bg);text-align:right}/* Ticker */ .ticker{background:var(--accent);color:#fff;padding:8px;white-space:nowrap;overflow:hidden} .ticker span{display:inline-block;animation:scroll 15s linear infinite} @keyframes scroll{0%{transform:translateX(-100%)}100%{transform:translateX(100%)}}
+
+header{background:var(--primary);color:#fff;padding:15px;display:flex;justify-content:space-between;align-items:center} .logo{color:var(--accent);font-weight:bold}
+
+.search{flex:1;margin:0 10px} .search input{width:100%;padding:8px;border-radius:20px;border:none;text-align:right}
+
+.hero{height:250px;background:url('https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9') center/cover;display:flex;align-items:center;justify-content:center;color:#fff} .hero h1{background:rgba(0,0,0,0.6);padding:10px;border-radius:10px}
+
+.container{padding:20px} .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:20px} .card{background:#fff;border-radius:10px;overflow:hidden;box-shadow:0 5px 15px rgba(0,0,0,0.1)} .card img{width:100%;height:180px;object-fit:cover} .card-body{padding:10px} .price{color:var(--success);font-weight:bold} .btn{background:var(--primary);color:#fff;border:none;padding:10px;width:100%;cursor:pointer}
+
+.cart-btn{position:fixed;bottom:20px;left:20px;background:var(--primary);color:#fff;width:60px;height:60px;border-radius:50%;display:flex;justify-content:center;align-items:center}
+
+#cart{position:fixed;left:-300px;top:0;width:300px;height:100%;background:#fff;padding:15px;transition:0.3s} #cart.active{left:0}
+
+.whatsapp{background:#25D366;color:#fff;padding:10px;text-align:center;margin-top:10px;cursor:pointer} </style>
+
 </head>
-<body><header>
-<div class="logo">GLAMRS BEAUTY</div>
+<body><div class="ticker"><span>🔥 Glamrs Beauty Parlour | Bridal Makeup | Courses Available | 📞 03488222368</span></div><header>
+<div class="logo">GLAMRS</div>
+<div class="search"><input type="text" placeholder="سروس تلاش کریں" onkeyup="searchItem(this.value)"></div>
 <div>📞 03488222368</div>
-</header><div class="hero">
-<h1>Glamrs Beauty Parlour & Training Center</h1>
-</div><div class="container">
-<h2>ہماری سروسز</h2>
-<div class="grid"><div class="card">
+</header><div class="hero"><h1>Glamrs Beauty Parlour</h1></div><div class="container">
+<h2>Services & Courses</h2>
+<div class="grid" id="grid"><div class="card item" data-name="bridal makeup">
 <img src="https://images.unsplash.com/photo-1522337360788-8b13dee7a37e">
 <div class="card-body">
 <h3>Bridal Makeup</h3>
-<button class="btn">Book Now</button>
+<div class="price">Rs. 15000</div>
+<button class="btn" onclick="add('Bridal Makeup',15000)">Book</button>
 </div>
-</div><div class="card">
+</div><div class="card item" data-name="hair styling">
 <img src="https://images.unsplash.com/photo-1519415510236-718bdfcd89c8">
 <div class="card-body">
 <h3>Hair Styling</h3>
-<button class="btn">Book Now</button>
+<div class="price">Rs. 3000</div>
+<button class="btn" onclick="add('Hair Styling',3000)">Book</button>
 </div>
-</div><div class="card">
+</div><div class="card item" data-name="facial skin care">
 <img src="https://images.unsplash.com/photo-1596464716127-f2a82984de30">
 <div class="card-body">
-<h3>Skin Care</h3>
-<button class="btn">Book Now</button>
+<h3>Facial / Skin Care</h3>
+<div class="price">Rs. 2500</div>
+<button class="btn" onclick="add('Facial',2500)">Book</button>
 </div>
-</div><div class="card">
+</div><div class="card item" data-name="makeup course training">
 <img src="https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9">
 <div class="card-body">
-<h3>Makeup Training</h3>
-<button class="btn">Join Course</button>
+<h3>Makeup Course</h3>
+<div class="price">Rs. 20000</div>
+<button class="btn" onclick="add('Course',20000)">Join</button>
 </div>
 </div></div>
-</div><footer>
-Glamrs Beauty Parlour | Contact: 03488222368
-</footer></body>
+</div><div class="cart-btn" onclick="toggleCart()">🛒</div><div id="cart">
+<h3>آپ کا آرڈر</h3>
+<div id="list"></div>
+<h4>Total: Rs. <span id="total">0</span></h4>
+<div class="whatsapp" onclick="send()">WhatsApp Order</div>
+</div><script>
+let cart=[];
+
+function toggleCart(){document.getElementById('cart').classList.toggle('active')}
+
+function add(name,price){
+let item=cart.find(i=>i.name==name);
+item?item.qty++:cart.push({name,price,qty:1});
+update();
+}
+
+function update(){
+let list=document.getElementById('list');
+let total=0;list.innerHTML='';
+cart.forEach(i=>{total+=i.price*i.qty;list.innerHTML+=i.name+' x'+i.qty+'<br>'});
+document.getElementById('total').innerText=total;
+}
+
+function searchItem(val){
+val=val.toLowerCase();
+document.querySelectorAll('.item').forEach(i=>{
+i.style.display=i.dataset.name.includes(val)?'block':'none'
+})
+}
+
+function send(){
+let text='Glamrs Beauty Order%0A';
+cart.forEach(i=>{text+=i.name+' x'+i.qty+'%0A'});
+window.open('https://wa.me/923488222368?text='+text)
+}
+</script></body>
 </html>
